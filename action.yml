@@ -1,0 +1,25 @@
+name: 'Parse NPM tag from Git tag'
+description: 'Extracts semver version and npm publish tag from GitHub tag'
+author: 'Yuki'
+inputs:
+  prefix:
+    description: 'Prefix to strip from tag (e.g. 'v', 'release-', 'rel/')'
+    required: false
+    default: 'v'
+outputs:
+  npm_tag:
+    description: "NPM publish tag (e.g. latest, beta)"
+  version:
+    description: "Full semantic version (e.g. 1.2.3-beta.1)"
+  major:
+    description: "Major version number"
+  minor:
+    description: "Minor version number"
+  patch:
+    description: "Patch version number"
+runs:
+  using: node20
+  main: ./dist/index.js
+branding:
+  icon: "tag"
+  color: "yellow"
