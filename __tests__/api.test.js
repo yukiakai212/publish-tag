@@ -49,7 +49,7 @@ describe('parse-tag action', () => {
   });
 
   it('parses beta tag correctly', async ({ github, core }) => {
-    github.context.ref = 'refs/tags/v1.2.3-beta.1';
+    github.context.ref = 'refs/tags/v1.2.3-beta.1+10.1';
     await runAction();
 
     expect(core.setOutput).toHaveBeenCalledWith('npm_tag', 'beta');
@@ -57,6 +57,8 @@ describe('parse-tag action', () => {
     expect(core.setOutput).toHaveBeenCalledWith('major', '1');
     expect(core.setOutput).toHaveBeenCalledWith('minor', '2');
     expect(core.setOutput).toHaveBeenCalledWith('patch', '3');
+    expect(core.setOutput).toHaveBeenCalledWith('build', '10.1');
+    expect(core.setOutput).toHaveBeenCalledWith('full', '1.2.3-beta.1+10.1');
   });
 
   it('parses stable tag as latest', async ({ github, core }) => {
@@ -77,7 +79,7 @@ describe('parse-tag action', () => {
   });
 
   it('respects custom prefix', async ({ github, core }) => {
-    github.context.ref = 'refs/tags/release-2.3.4';
+    github.context.ref = 'refs/tags/release-2.3.4+10.1';
 
     core.getInput = vi.fn().mockReturnValue('release-');
 
@@ -85,6 +87,7 @@ describe('parse-tag action', () => {
 
     expect(core.setOutput).toHaveBeenCalledWith('npm_tag', 'latest');
     expect(core.setOutput).toHaveBeenCalledWith('version', '2.3.4');
+    expect(core.setOutput).toHaveBeenCalledWith('build', '10.1');
   });
 
   it('fails if tag doesn’t match prefix', async ({ github, core }) => {

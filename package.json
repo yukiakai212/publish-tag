@@ -1,5 +1,5 @@
 {
-  "name": "parse-npm-tag",
+  "name": "publish-tag",
   "version": "1.0.0",
   "description": "Extracts semver version and npm publish tag from GitHub tag",
   "type": "module",
@@ -17,7 +17,7 @@
     "parse"
   ],
   "author": "Yuki_akai",
-  "homepage": "https://github.com/yukiakai212/parse-npm-tag",
+  "homepage": "https://github.com/yukiakai212/publish-tag",
   "engines": {
     "node": ">= 16"
   },
@@ -29,10 +29,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yukiakai212/parse-npm-tag.git"
+    "url": "git+https://github.com/yukiakai212/publish-tag.git"
   },
   "bugs": {
-    "url": "https://github.com/yukiakai212/parse-npm-tag/issues"
+    "url": "https://github.com/yukiakai212/publish-tag/issues"
   },
   "license": "ISC",
   "dependencies": {

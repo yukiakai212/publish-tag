@@ -1,4 +1,4 @@
-# parse-npm-tag
+# publish-tag
 
 A GitHub Action that parses a Git tag (e.g. `v1.2.3-beta.1`) into a proper NPM publish tag (e.g. `beta`) and semantic version info.
 
@@ -8,9 +8,9 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 ## 🚀 Features
 
-* 🔍 Parses GitHub semver tag like `v1.2.3-beta.1`
+* 🔍 Parses GitHub semver tag like `v1.2.3-beta.1+10.1`
 * 🏷 Outputs `npm_tag` (e.g. `beta`, `latest`, etc.)
-* 🔢 Also returns `version`, `major`, `minor`, `patch`
+* 🔢 Also returns `version`, `major`, `minor`, `patch`, `build`
 * ⚙️ Customizable prefix (`v`, `release-`, etc.)
 * ❌ Fails on invalid or non-semver tags
 
@@ -25,6 +25,8 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 | `major`   | Major version number                                 |
 | `minor`   | Minor version number                                 |
 | `patch`   | Patch version number                                 |
+| `build`   | Build version number                                 |
+| `full`    | Full semantic version and build                      |
 
 ---
 
@@ -47,7 +49,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Parse Tag
-        uses: yukiakai212/parse-npm-tag@v1
+        uses: yukiakai212/publish-tag@v1
         id: tag
         with:
           prefix: "v"
@@ -62,12 +64,14 @@ jobs:
 
 ## 📤 Examples
 
-| Git Tag          | npm\_tag | version      | major | minor | patch |
-| ---------------- | -------- | ------------ | ----- | ----- | ----- |
-| `v1.2.3`         | latest   | 1.2.3        | 1     | 2     | 3     |
-| `v2.0.0-beta.1`  | beta     | 2.0.0-beta.1 | 2     | 0     | 0     |
-| `release-1.3.0`  | latest   | 1.3.0        | 1     | 3     | 0     |
-| `rel/1.0.0-rc.2` | rc       | 1.0.0-rc.2   | 1     | 0     | 0     |
+| Git Tag            | npm\_tag | version      | major | minor | patch | build | Full               |
+| ------------------ | -------- | ------------ | ----- | ----- | ----- | ----- | ------------------ |
+| `v1.2.3`           | latest   | 1.2.3        | 1     | 2     | 3     |       | `1.2.3`            |
+| `v2.0.0-beta.1`    | beta     | 2.0.0-beta.1 | 2     | 0     | 0     |       | `2.0.0-beta.1`     |
+| `release-1.3.0`    | latest   | 1.3.0        | 1     | 3     | 0     |       | `1.3.0`            |
+| `rel/1.0.0-rc.2`   | rc       | 1.0.0-rc.2   | 1     | 0     | 0     |       | `1.0.0-rc.2`       |
+| `rel/1.0.0-rc.2`   | rc       | 1.0.0-rc.2   | 1     | 0     | 0     |       | `1.0.0-rc.2`       |
+| `v1.0.0-beta+10.1` | beta     | 1.0.0-beta   | 1     | 0     | 0     | 10.1  | `1.0.0-beta+10.1`  |
 
 ---
 
