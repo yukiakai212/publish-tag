@@ -7,6 +7,6 @@ await build({
   platform: 'node',
   target: 'node20',
   outfile: 'dist/index.js',
-  format: 'esm',
+  format: 'cjs',
   external: [],
 });
