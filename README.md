@@ -9,8 +9,8 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 ## 🚀 Features
 
 * 🔍 Parses GitHub semver tag like `v1.2.3-beta.1+10.1`
-* 🏷 Outputs `npm_tag` (e.g. `beta`, `latest`, etc.)
-* 🔢 Also returns `version`, `major`, `minor`, `patch`, `build`
+* 🏷 Outputs `tag` (e.g. `beta`, `latest`, etc.)
+* 🔢 Also returns `version`, `major`, `minor`, `patch`, `build`, `full`
 * ⚙️ Customizable prefix (`v`, `release-`, etc.)
 * ❌ Fails on invalid or non-semver tags
 
@@ -20,7 +20,7 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 | Output    | Description                                          |
 | --------- | ---------------------------------------------------- |
-| `npm_tag` | Tag for `npm publish` (`latest`, `beta`, `rc`, etc.) |
+| `tag`     | Tag for `npm publish` (`latest`, `beta`, `rc`, etc.) |
 | `version` | Full semantic version parsed                         |
 | `major`   | Major version number                                 |
 | `minor`   | Minor version number                                 |
@@ -55,7 +55,7 @@ jobs:
           prefix: "v"
 
       - name: Publish to NPM
-        run: npm publish --tag ${{ steps.tag.outputs.npm_tag }}
+        run: npm publish --tag ${{ steps.tag.outputs.tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
@@ -64,7 +64,7 @@ jobs:
 
 ## 📤 Examples
 
-| Git Tag            | npm\_tag | version      | major | minor | patch | build | Full               |
+| Git Tag            | tag      | version      | major | minor | patch | build | Full               |
 | ------------------ | -------- | ------------ | ----- | ----- | ----- | ----- | ------------------ |
 | `v1.2.3`           | latest   | 1.2.3        | 1     | 2     | 3     |       | `1.2.3`            |
 | `v2.0.0-beta.1`    | beta     | 2.0.0-beta.1 | 2     | 0     | 0     |       | `2.0.0-beta.1`     |

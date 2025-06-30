@@ -7,7 +7,7 @@ inputs:
     required: false
     default: 'v'
 outputs:
-  npm_tag:
+  publish_tag:
     description: "NPM publish tag (e.g. latest, beta)"
   full:
     description: "Semantic version and build"

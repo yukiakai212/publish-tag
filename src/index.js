@@ -26,7 +26,7 @@ try {
   const build = parsed.build.join('.').toString();
   const full = parsed.version.toString() + '+' +build;
 
-  core.setOutput('npm_tag', npmTag);
+  core.setOutput('tag', npmTag);
   core.setOutput('version', parsed.version);
   core.setOutput('major', parsed.major.toString());
   core.setOutput('minor', parsed.minor.toString());

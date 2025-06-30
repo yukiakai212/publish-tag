@@ -52,7 +52,7 @@ describe('parse-tag action', () => {
     github.context.ref = 'refs/tags/v1.2.3-beta.1+10.1';
     await runAction();
 
-    expect(core.setOutput).toHaveBeenCalledWith('npm_tag', 'beta');
+    expect(core.setOutput).toHaveBeenCalledWith('tag', 'beta');
     expect(core.setOutput).toHaveBeenCalledWith('version', '1.2.3-beta.1');
     expect(core.setOutput).toHaveBeenCalledWith('major', '1');
     expect(core.setOutput).toHaveBeenCalledWith('minor', '2');
@@ -66,7 +66,7 @@ describe('parse-tag action', () => {
 
     await runAction();
 
-    expect(core.setOutput).toHaveBeenCalledWith('npm_tag', 'latest');
+    expect(core.setOutput).toHaveBeenCalledWith('tag', 'latest');
     expect(core.setOutput).toHaveBeenCalledWith('version', '1.0.0');
   });
 
@@ -85,7 +85,7 @@ describe('parse-tag action', () => {
 
     await runAction();
 
-    expect(core.setOutput).toHaveBeenCalledWith('npm_tag', 'latest');
+    expect(core.setOutput).toHaveBeenCalledWith('tag', 'latest');
     expect(core.setOutput).toHaveBeenCalledWith('version', '2.3.4');
     expect(core.setOutput).toHaveBeenCalledWith('build', '10.1');
   });
