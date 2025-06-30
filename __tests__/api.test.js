@@ -36,7 +36,7 @@ vi.mock('@actions/github', async (importOriginal) => {
 });
 
 // Load the action file
-const runAction = async () => await import(path.resolve(import.meta.dirname, '../dist/index.js'));
+const runAction = async () => await import(path.resolve(import.meta.dirname, '../src/index.js'));
 
 describe('parse-tag action', () => {
   beforeEach(async (ctx) => {

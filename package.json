@@ -9,7 +9,7 @@
     "format": "prettier --write **/*.js",
     "format:check": "prettier --check **/*.js",
     "lint": "eslint src/**/*.js",
-    "build": "npx tsup"
+    "build": "node build.js"
   },
   "keywords": [
     "parse-npm-tag",
@@ -42,6 +42,7 @@
     "semver": "^7.7.2"
   },
   "devDependencies": {
+    "esbuild": "^0.25.5",
     "eslint": "^9.30.0",
     "eslint-plugin-n": "^17.20.0",
     "prettier": "^3.6.2",
