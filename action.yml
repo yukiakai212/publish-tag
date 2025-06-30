@@ -26,4 +26,4 @@ runs:
   main: ./dist/index.js
 branding:
   icon: "tag"
-  color: "yellow"
+  color: "green"
