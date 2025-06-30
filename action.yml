@@ -23,7 +23,7 @@ outputs:
     description: "Build version number"
 runs:
   using: node20
-  main: ./dist/index.js
+  main: ./dist/index.cjs
 branding:
   icon: "tag"
   color: "green"

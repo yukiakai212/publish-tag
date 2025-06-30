@@ -6,7 +6,7 @@ await build({
   bundle: true,
   platform: 'node',
   target: 'node20',
-  outfile: 'dist/index.js',
+  outfile: 'dist/index.cjs',
   format: 'cjs',
   external: [],
 });
