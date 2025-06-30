@@ -1,4 +1,4 @@
-name: 'Parse NPM tag from Git tag'
+name: 'Parse publish tag from Git tag'
 description: 'Extracts semver version and npm publish tag from GitHub tag'
 author: 'Yuki'
 inputs:
@@ -7,7 +7,7 @@ inputs:
     required: false
     default: 'v'
 outputs:
-  publish_tag:
+  tag:
     description: "NPM publish tag (e.g. latest, beta)"
   full:
     description: "Semantic version and build"
