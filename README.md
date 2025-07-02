@@ -49,7 +49,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Parse Tag
-        uses: yukiakaiorg/publish-tag@v1
+        uses: yukiakai212/publish-tag@v1
         id: tag
         with:
           prefix: "v"
