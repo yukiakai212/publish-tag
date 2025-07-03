@@ -1,5 +1,6 @@
 # publish-tag
 
+[![Build Status][github-build-url]][github-repo-url]
 [![codecov][codecov-image]][codecov-url]
 
 A GitHub Action that parses a Git tag (e.g. `v1.2.3-beta.1`) into a proper NPM publish tag (e.g. `beta`) and semantic version info.
@@ -84,3 +85,5 @@ MIT License © 2025 [Yuki](https://github.com/yukiakai212)
 
 [codecov-image]: https://codecov.io/gh/yukiakai212/publish-tag/branch/main/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/yukiakai212/publish-tag
+[github-build-url]: https://github.com/yukiakai212/publish-tag/actions/workflows/build.yml/badge.svg
+[github-repo-url]: https://github.com/yukiakai212/publish-tag/
