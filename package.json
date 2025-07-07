@@ -1,11 +1,11 @@
 {
   "name": "publish-tag",
   "version": "1.0.0",
-  "description": "Extracts semver version and npm publish tag from GitHub tag",
+  "description": "Extracts semver version and publish tag from github tag or package.json",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build && npx vitest run --reporter verbose --coverage",
+    "test": "npm run build && npx vitest run --reporter verbose --coverage --silent false",
     "format": "prettier --write **/*.js",
     "format:check": "prettier --check **/*.js",
     "lint": "eslint src/**/*.js",

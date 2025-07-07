@@ -1,11 +1,18 @@
-name: 'Parse publish tag from Git tag'
-description: 'Extracts semver version and npm publish tag from GitHub tag'
+name: 'Publish tag manager'
+description: 'Extracts semver version and publish tag from github tag or package.json'
 author: 'Yuki'
 inputs:
   prefix:
     description: 'Prefix to strip from tag (e.g. v, release-'
     required: false
     default: 'v'
+  source:
+    description: |
+      Optional path to a package.json file to read version from.
+      - If provided: version will be read from this file, and the prefix will be ignored.
+      - If omitted: version will be parsed from Git tag (e.g. refs/tags/v1.2.3)
+    required: false
+    default: ''
 outputs:
   tag:
     description: "NPM publish tag (e.g. latest, beta)"

@@ -4,12 +4,23 @@ import path from 'path';
 //import github from '@actions/github';
 
 // Mock core and github
+
+const mockData = {
+  prefix: 'v',
+  source: '',
+};
+const resetMockData = () => {
+  mockData.prefix = 'v';
+  mockData.source = '';
+};
 vi.mock('@actions/core', async (importOriginal) => {
   let origin = await importOriginal();
   let mock = {
     setOutput: vi.fn(),
     setFailed: vi.fn(),
-    getInput: vi.fn().mockReturnValue('v'), // default prefix
+    getInput: vi.fn().mockImplementation((name) => {
+      return mockData[name];
+    }),
     info: vi.fn(),
   };
   return {
@@ -81,9 +92,11 @@ describe('parse-tag action', () => {
   it('respects custom prefix', async ({ github, core }) => {
     github.context.ref = 'refs/tags/release-2.3.4+10.1';
 
-    core.getInput = vi.fn().mockReturnValue('release-');
+    //core.getInput = vi.fn().mockReturnValue('release-');
+    mockData.prefix = 'release-';
 
     await runAction();
+    resetMockData();
 
     expect(core.setOutput).toHaveBeenCalledWith('tag', 'latest');
     expect(core.setOutput).toHaveBeenCalledWith('version', '2.3.4');
@@ -92,12 +105,23 @@ describe('parse-tag action', () => {
 
   it('fails if tag doesn’t match prefix', async ({ github, core }) => {
     github.context.ref = 'refs/tags/x1.2.3';
-    core.getInput = vi.fn().mockReturnValue('v');
+    //core.getInput = vi.fn().mockReturnValue('v');
 
     await runAction();
 
     expect(core.setFailed).toHaveBeenCalledWith(
       "Tag 'x1.2.3' does not start with expected prefix 'v'",
     );
+  });
+
+  it('respects custom source', async ({ github, core }) => {
+    github.context.ref = 'refs/tags/x1.2.3';
+    //core.getInput = vi.fn().mockReturnValue('package.json');
+    mockData.source = 'package.json';
+
+    await runAction();
+    resetMockData();
+
+    expect(core.setOutput).toHaveBeenCalledWith('tag', 'latest');
   });
 });

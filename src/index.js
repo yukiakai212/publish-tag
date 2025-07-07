@@ -1,11 +1,24 @@
 import core from '@actions/core';
+import fs from 'node:fs';
 import github from '@actions/github';
 import semver from 'semver';
 
 try {
-  const prefix = core.getInput('prefix') || 'v';
-  const ref = github.context.ref; // refs/tags/v1.2.3-beta.1
-  const tagName = ref.replace(/^refs\/tags\//, '');
+  const getData = () => {
+    const source = core.getInput('source');
+    let tagName;
+    let prefix;
+    if (source) {
+      tagName = JSON.parse(fs.readFileSync(source)).version;
+      prefix = '';
+    } else {
+      const ref = github.context.ref; // refs/tags/v1.2.3-beta.1
+      tagName = ref.replace(/^refs\/tags\//, '');
+      prefix = core.getInput('prefix') || 'v';
+    }
+    return { tagName, prefix };
+  };
+  const { tagName, prefix } = getData();
 
   if (!tagName.startsWith(prefix)) {
     throw new Error(`Tag '${tagName}' does not start with expected prefix '${prefix}'`);
@@ -36,6 +49,7 @@ try {
 
   core.info(`Tag parsed: ${tagName} → ${parsed.version} (${npmTag})`);
 } catch (err) {
+  //console.log(err);
   core.setFailed(err.message);
 }
 export default true;

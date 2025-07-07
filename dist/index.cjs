@@ -181,7 +181,7 @@ var require_file_command = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.prepareKeyValueMessage = exports2.issueFileCommand = void 0;
     var crypto = __importStar(require("crypto"));
-    var fs = __importStar(require("fs"));
+    var fs2 = __importStar(require("fs"));
     var os = __importStar(require("os"));
     var utils_1 = require_utils();
     function issueFileCommand(command, message) {
@@ -189,10 +189,10 @@ var require_file_command = __commonJS({
       if (!filePath) {
         throw new Error(`Unable to find environment variable for file command ${command}`);
       }
-      if (!fs.existsSync(filePath)) {
+      if (!fs2.existsSync(filePath)) {
         throw new Error(`Missing file at path: ${filePath}`);
       }
-      fs.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
+      fs2.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
         encoding: "utf8"
       });
     }
@@ -18509,12 +18509,12 @@ var require_io_util = __commonJS({
     var _a;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getCmdPath = exports2.tryGetExecutablePath = exports2.isRooted = exports2.isDirectory = exports2.exists = exports2.READONLY = exports2.UV_FS_O_EXLOCK = exports2.IS_WINDOWS = exports2.unlink = exports2.symlink = exports2.stat = exports2.rmdir = exports2.rm = exports2.rename = exports2.readlink = exports2.readdir = exports2.open = exports2.mkdir = exports2.lstat = exports2.copyFile = exports2.chmod = void 0;
-    var fs = __importStar(require("fs"));
+    var fs2 = __importStar(require("fs"));
     var path = __importStar(require("path"));
-    _a = fs.promises, exports2.chmod = _a.chmod, exports2.copyFile = _a.copyFile, exports2.lstat = _a.lstat, exports2.mkdir = _a.mkdir, exports2.open = _a.open, exports2.readdir = _a.readdir, exports2.readlink = _a.readlink, exports2.rename = _a.rename, exports2.rm = _a.rm, exports2.rmdir = _a.rmdir, exports2.stat = _a.stat, exports2.symlink = _a.symlink, exports2.unlink = _a.unlink;
+    _a = fs2.promises, exports2.chmod = _a.chmod, exports2.copyFile = _a.copyFile, exports2.lstat = _a.lstat, exports2.mkdir = _a.mkdir, exports2.open = _a.open, exports2.readdir = _a.readdir, exports2.readlink = _a.readlink, exports2.rename = _a.rename, exports2.rm = _a.rm, exports2.rmdir = _a.rmdir, exports2.stat = _a.stat, exports2.symlink = _a.symlink, exports2.unlink = _a.unlink;
     exports2.IS_WINDOWS = process.platform === "win32";
     exports2.UV_FS_O_EXLOCK = 268435456;
-    exports2.READONLY = fs.constants.O_RDONLY;
+    exports2.READONLY = fs2.constants.O_RDONLY;
     function exists(fsPath) {
       return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -25789,12 +25789,25 @@ __export(index_exports, {
 });
 module.exports = __toCommonJS(index_exports);
 var import_core = __toESM(require_core(), 1);
+var import_node_fs = __toESM(require("node:fs"), 1);
 var import_github = __toESM(require_github(), 1);
 var import_semver = __toESM(require_semver2(), 1);
 try {
-  const prefix = import_core.default.getInput("prefix") || "v";
-  const ref = import_github.default.context.ref;
-  const tagName = ref.replace(/^refs\/tags\//, "");
+  const getData = () => {
+    const source = import_core.default.getInput("source");
+    let tagName2;
+    let prefix2;
+    if (source) {
+      tagName2 = JSON.parse(import_node_fs.default.readFileSync(source)).version;
+      prefix2 = "";
+    } else {
+      const ref = import_github.default.context.ref;
+      tagName2 = ref.replace(/^refs\/tags\//, "");
+      prefix2 = import_core.default.getInput("prefix") || "v";
+    }
+    return { tagName: tagName2, prefix: prefix2 };
+  };
+  const { tagName, prefix } = getData();
   if (!tagName.startsWith(prefix)) {
     throw new Error(`Tag '${tagName}' does not start with expected prefix '${prefix}'`);
   }
@@ -25818,6 +25831,7 @@ try {
   import_core.default.setOutput("build", build);
   import_core.default.info(`Tag parsed: ${tagName} \u2192 ${parsed.version} (${npmTag})`);
 } catch (err) {
+  console.log(err);
   import_core.default.setFailed(err.message);
 }
 var index_default = true;
