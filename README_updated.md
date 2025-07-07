@@ -1,11 +1,11 @@
 # publish-tag
 
-[![Build Status][github-build-url]][github-repo-url]
+[![Build Status][github-build-url]][github-repo-url]  
 [![codecov][codecov-image]][codecov-url]
 
 A GitHub Action that parses a Git tag (e.g. `v1.2.3-beta.1`) or from package.json into a proper NPM publish tag (e.g. `beta`) and semantic version info.
 
-Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`, `alpha`, or `rc` tags automatically based on Git tag names or package.json.
+Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`, `alpha`, or `rc` tags automatically based on Git tag names.
 
 ---
 
@@ -36,10 +36,10 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 ## 🔧 Inputs
 
-| Input    | Description                                                                                      | Default |
-| -------- | -------------------------------------------------------------------------------------------------| ------- |
-| `prefix` | Optional prefix to strip from Git tag (e.g. `v`, `release-`)                                     | `v`     |
-| `source` | Optional path to a `package.json` file to read version from. If set, prefix are ignored.         | -       |
+| Input    | Description                                                                                   | Default        |
+| -------- | --------------------------------------------------------------------------------------------- | -------------- |
+| `prefix` | Optional prefix to strip from Git tag (e.g. `v`, `release-`). Ignored if `source` is set.     | `v`            |
+| `source` | Optional path to a `package.json` file to read version from. If set, tag and prefix are ignored. | *(not set)*    |
 
 ---
 
@@ -100,7 +100,6 @@ jobs:
 | `v2.0.0-beta.1`    | beta     | 2.0.0-beta.1 | 2     | 0     | 0     |       | `2.0.0-beta.1`     |
 | `release-1.3.0`    | latest   | 1.3.0        | 1     | 3     | 0     |       | `1.3.0`            |
 | `rel/1.0.0-rc.2`   | rc       | 1.0.0-rc.2   | 1     | 0     | 0     |       | `1.0.0-rc.2`       |
-| `rel/1.0.0-rc.2`   | rc       | 1.0.0-rc.2   | 1     | 0     | 0     |       | `1.0.0-rc.2`       |
 | `v1.0.0-beta+10.1` | beta     | 1.0.0-beta   | 1     | 0     | 0     | 10.1  | `1.0.0-beta+10.1`  |
 
 ---
@@ -109,8 +108,7 @@ jobs:
 
 MIT License © 2025 [Yuki](https://github.com/yukiakai212)
 
-
-[codecov-image]: https://codecov.io/gh/yukiakai212/publish-tag/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/yukiakai212/publish-tag
-[github-build-url]: https://github.com/yukiakai212/publish-tag/actions/workflows/build.yml/badge.svg
+[codecov-image]: https://codecov.io/gh/yukiakai212/publish-tag/branch/main/graph/badge.svg  
+[codecov-url]: https://codecov.io/gh/yukiakai212/publish-tag  
+[github-build-url]: https://github.com/yukiakai212/publish-tag/actions/workflows/build.yml/badge.svg  
 [github-repo-url]: https://github.com/yukiakai212/publish-tag/
