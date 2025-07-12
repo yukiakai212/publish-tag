@@ -27,14 +27,14 @@ jobs:
         run: npm ci
       - name: Build & Test
         run: npm run test
-      
+      - name: Stage dist/ manually
+        run: git add -f dist/
       - name: Commit and push built files
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "chore: build action output"
           branch: main
           push_options: '--force'
-          file_pattern: dist/
           skip_dirty_check: true
       - name: Update `v1` tag
         run: |
