@@ -28,7 +28,7 @@ jobs:
       - name: Build & Test
         run: npm run test
       - name: Commit and push built files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "chore: build action output"
           branch: main
