@@ -9,18 +9,18 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 ---
 
-## 🚀 Features
+## Features
 
-* 🔍 Parses GitHub semver tag like `v1.2.3-beta.1+10.1`
-* 🏷 Outputs `tag` (e.g. `beta`, `latest`, etc.)
-* 🔢 Also returns `version`, `major`, `minor`, `patch`, `build`, `full`
-* ⚙️ Customizable prefix (`v`, `release-`, etc.)
-* 📦 Supports reading version directly from any `package.json` file
-* ❌ Fails on invalid or non-semver tags
+* Parses GitHub semver tag like `v1.2.3-beta.1+10.1`
+* Outputs `tag` (e.g. `beta`, `latest`, etc.)
+* Also returns `version`, `major`, `minor`, `patch`, `build`, `full`
+* Customizable prefix (`v`, `release-`, etc.)
+* Supports reading version directly from any `package.json` file
+* Fails on invalid or non-semver tags
 
 ---
 
-## 📦 Outputs
+## Outputs
 
 | Output    | Description                                          |
 | --------- | ---------------------------------------------------- |
@@ -34,7 +34,7 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 ---
 
-## 🔧 Inputs
+## Inputs
 
 | Input    | Description                                                                                      | Default |
 | -------- | -------------------------------------------------------------------------------------------------| ------- |
@@ -43,7 +43,7 @@ Useful in CI/CD pipelines that publish to NPM with support for `latest`, `beta`,
 
 ---
 
-## 🧪 Example Usage
+## Example Usage
 
 ### From Git tag (default)
 
@@ -92,7 +92,7 @@ jobs:
 
 ---
 
-## 📤 Examples
+## Examples
 
 | Git Tag            | tag      | version      | major | minor | patch | build | Full               |
 | ------------------ | -------- | ------------ | ----- | ----- | ----- | ----- | ------------------ |
@@ -105,7 +105,7 @@ jobs:
 
 ---
 
-## 📘 License
+## License
 
 MIT License © 2025 [Yuki](https://github.com/yukiakai212)
 
